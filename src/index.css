@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/*
+  Togetherly design tokens — botanical palette.
+
+  The six brand hues (page #E7DFD1, surface #F5F0E8, charcoal #403A38, sage #B8C68B,
+  rose #C9829D, butter #E8E5AD) are reproduced verbatim and always sit at step 500/400 of
+  their own family. Every other step in the same family is derived by holding hue and
+  saturation and moving lightness only, so no hue outside the six is introduced.
+
+  Text always comes from the ink or *-700-and-darker tiers, never from a brand fill.
+*/
+@theme {
+  /* ── Families ─────────────────────────────────────────────────────── */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Sand — warm paper neutrals (hue 38°, from the page background) ── */
+  --color-sand-50: #faf8f5; /* raised interior: inputs, light text on dark fills */
+  --color-sand-100: #f5f0e8; /* Surface — cards, sheets */
+  --color-sand-200: #f1ece4;
+  --color-sand-300: #eae3d7;
+  --color-sand-400: #e7dfd1; /* Background — the page sheet (brand) */
+  --color-sand-500: #e3dac9;
+  --color-sand-600: #d9ccb5;
+
+  /* ── Ink — text (hue 15°, from charcoal) ── */
+  --color-ink-900: #403a38; /* Charcoal — body, headings, icons (9.84 on surface) */
+  --color-ink-700: #574f4c; /* 7.04 */
+  --color-ink-500: #675e5a; /* 5.57 — secondary text, timestamps */
+  --color-ink-400: #7a6f6b; /* 4.29 — large text and icon strokes only */
+  --color-ink-300: #a09692; /* 2.55 — disabled, decorative. Never content */
+
+  /* ── Rose — emotional accent (hue 337°, sat 40%) ── */
+  --color-rose-50: #f9f1f4;
+  --color-rose-100: #f4e6eb;
+  --color-rose-200: #edd4dd;
+  --color-rose-300: #e3bfcd;
+  --color-rose-400: #d9a6b9;
+  --color-rose-500: #c9829d; /* brand — fills only (2.58 on surface) */
+  --color-rose-600: #b24d73; /* 4.41 — large text, graphic ink */
+  --color-rose-700: #a7486c; /* 4.89 — accent text: links, labels, eyebrows */
+  --color-rose-800: #9d4466; /* 5.36 — primary button fill, solid panels */
+  --color-rose-900: #8e3e5c; /* 6.18 — hover, pressed */
+  --color-rose-950: #59263a; /* 10.50 — highest-emphasis ink on rose tints */
+
+  /* ── Sage — calm accent (hue 74°, sat 34%) ── */
+  --color-sage-50: #f7f8f1;
+  --color-sage-100: #f0f3e7;
+  --color-sage-200: #e6ebd6;
+  --color-sage-300: #d9e1c1;
+  --color-sage-400: #cbd5aa;
+  --color-sage-500: #b8c68b; /* brand — fills only; charcoal text on it = 6.11 */
+  --color-sage-600: #96ab54;
+  --color-sage-700: #788943; /* 3.39 — icon strokes, UI-only contrast */
+  --color-sage-800: #606d36; /* 4.95 — accent text */
+  --color-sage-900: #485228; /* 7.37 */
+
+  /* ── Butter — highlight fill (hue 57°, sat 56%). Never a text colour. ── */
+  --color-butter-50: #fcfbf3;
+  --color-butter-100: #f9f9eb;
+  --color-butter-200: #f5f4db;
+  --color-butter-300: #efedc7;
+  --color-butter-400: #e8e5ad; /* brand — milestone highlight; charcoal on it = 8.57 */
+  --color-butter-500: #e0dc8f;
+  --color-butter-600: #d7d270;
+
+  /* ── Backwards-compatible aliases ─────────────────────────────────────
+     ~77 existing class sites use the cream scale. Aliasing rather than
+     renaming keeps the palette migration inside this one file. */
+  --color-cream-50: var(--color-sand-50);
+  --color-cream-100: var(--color-sand-400);
+  --color-cream-200: var(--color-sand-500);
+  --color-cream-300: var(--color-sand-600);
+
+  /* ── Type scale ───────────────────────────────────────────────────────
+     Page titles stay on the built-in 3xl/4xl pair (30 → 36). These names
+     cover the tiers that had drifted between pages. */
+  --text-title-section: 1.25rem; /* 20 / 28 — every page-level h2 */
+  --text-title-section--line-height: 1.75rem;
+  --text-title-card: 1.125rem; /* 18 / 26 — card titles, month labels */
+  --text-title-card--line-height: 1.625rem;
+  --text-figure: 1.75rem; /* 28 / 1 — counters, invitation code */
+  --text-figure--line-height: 1;
+  --text-label: 0.875rem; /* 14 / 20 — form labels, tab labels */
+  --text-label--line-height: 1.25rem;
+  --text-xs: 0.8125rem; /* metadata floor raised 12 → 13px */
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.9375rem; /* body 14 → 15px */
+  --text-sm--line-height: 1.5rem;
+
+  --tracking-eyebrow: 0.06em;
+  --tracking-code: 0.18em;
+
+  /* ── Radius — four steps, tighter than the previous 32/44px ── */
+  --radius-4xl: 1.25rem; /* 20px — cards */
+  --radius-5xl: 1.5rem; /* 24px — hero frames, full-bleed panels */
+
+  /* ── Elevation — anchored on charcoal ── */
+  --shadow-soft: 0 2px 8px -2px rgb(64 58 56 / 0.07), 0 12px 32px -12px rgb(64 58 56 / 0.12);
+  --shadow-lift: 0 4px 12px -4px rgb(64 58 56 / 0.09), 0 24px 48px -16px rgb(64 58 56 / 0.16);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-sand-400 font-sans text-ink-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+
+  /* 5.36 on a card and 4.60 on the page sheet — clears the 3:1 floor for
+     non-text indicators on both surfaces, while staying in brand. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-rose-800;
+  }
+
+  ::selection {
+    @apply bg-rose-200 text-ink-900;
+  }
+}
+
+/* Cards rest on the sheet with shadow alone; borders are reserved for inputs and
+   for the few panels that intentionally carry an accent edge. */
+@utility surface {
+  @apply rounded-4xl bg-sand-100 shadow-soft;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
